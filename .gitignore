@@ -1,4 +1,8 @@
 *.png
 *.jpg
 *.jpeg
-./images
+
+/images
+/outputs
+
+.DS_Store
