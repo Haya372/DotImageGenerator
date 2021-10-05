@@ -8,11 +8,14 @@
     />
     <div v-if="image != null">
       <v-img :src="imageUrl" />
+      <v-btn @click="onUpload">Upload</v-btn>
     </div>
   </div>
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   name: "FileUpload",
   data() {
@@ -28,6 +31,16 @@ export default {
         this.image = null;
       }
     },
+    async onUpload(){
+      try {
+        let img = new FormData();
+        img.append("image",this.image)
+        const res = await axios.post('/img', img);
+        console.log(res);
+      } catch (err) {
+        console.log(err);
+      }
+    }
   },
   computed: {
     imageUrl(){

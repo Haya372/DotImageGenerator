@@ -9,8 +9,8 @@ module.exports = merge(webpackConfig, {
     host: '0.0.0.0',
     port: 10000,
     proxy: {
-      '/api/**': {
-        target: 'http://localhost:3000',
+      '/img/**': {
+        target: 'http://localhost:5000',
         secure: false,
         logLevel: 'debug'
       }
