@@ -2,8 +2,6 @@ import cv2
 from sklearn.cluster import KMeans
 import numpy as np
 
-#img = cv2.imread('images/IMG_7298.PNG')
-
 # 色をr種類にクラスタリングする
 def roundColor(dst, r = 10):
   h, w = dst.shape[:2]
@@ -29,12 +27,18 @@ def roundColor(dst, r = 10):
   data = data.reshape((h, w, 3))
   return data
 
-def makeDotImg(img, height = 100, width = 100, r = 10):
-  dst = cv2.resize(img, dsize=(width, height))
-  dst = roundColor(dst, r)
-  return cv2.resize(dst, dsize=(500, 500))
+OUTPUT_DIR = 'outputs'
+def makeDotImg(filepath, r = 0.2, c = 10):
+  img = cv2.imread(filepath)
+  w, h = img.shape[:2]
+  dst = cv2.resize(img, dsize=(int(w * r), int(h * r)))
+  dst = roundColor(dst, c)
+  output = cv2.resize(dst, dsize=(int(w), int(h)))
+  return output
 
-#cv2.imshow('before', cv2.resize(img, dsize=(500, 500)))
-#cv2.imshow('after', makeDotImg(img))
-#cv2.waitKey(0)
-#cv2.destroyAllWindows()
+
+# img = cv2.imread('/Users/mitomihayato/dot-image/uploads/cat_img_1633269692472.png')
+# cv2.imshow('before', img)
+# cv2.imshow('after', makeDotImg(img))
+# cv2.waitKey(0)
+# cv2.destroyAllWindows()

@@ -10,6 +10,10 @@
       <v-img :src="imageUrl" />
       <v-btn @click="onUpload">Upload</v-btn>
     </div>
+    <div v-if="download != null">
+      <v-img :src="downloadUrl"/>
+      <div>表示</div>
+    </div>
   </div>
 </template>
 
@@ -21,6 +25,7 @@ export default {
   data() {
     return {
       image: null,
+      download: null
     };
   },
   methods: {
@@ -35,8 +40,8 @@ export default {
       try {
         let img = new FormData();
         img.append("image",this.image)
-        const res = await axios.post('/img', img);
-        console.log(res);
+        const res = await axios.post('/img', img, {responseType: 'arraybuffer'});
+        this.download = new Blob([res.data], { type: 'image/jpeg' });
       } catch (err) {
         console.log(err);
       }
@@ -46,6 +51,12 @@ export default {
     imageUrl(){
       if(this.image){
         return URL.createObjectURL(this.image);
+      }
+      return null;
+    },
+    downloadUrl(){
+      if(this.download){
+        return URL.createObjectURL(this.download);
       }
       return null;
     }
