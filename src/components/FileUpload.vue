@@ -87,7 +87,9 @@ export default {
     async onUpload(){
       try {
         let img = new FormData();
-        img.append("image",this.image)
+        img.append("image",this.image);
+        img.append("ratio", this.ratio);
+        img.append("colors", this.use_colors);
         const res = await axios.post('/img', img, {responseType: 'arraybuffer'});
         this.download = new Blob([res.data], { type: 'image/jpeg' });
       } catch (err) {
