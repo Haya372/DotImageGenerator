@@ -1,23 +1,25 @@
 <template>
   <Portal to="portal">
     <div class="modal-background">
-      <v-container>
-        <v-card class="centerd pa-4">
-          <v-row>
-            <v-col cols="12">
-              <v-img :src="url" />
-            </v-col>
-          </v-row>
-          <v-row>
-            <v-col cols="6">
-              <v-btn @click="onSave" color="success">画像を保存</v-btn>
-            </v-col>
-            <v-col cols="6">
-              <v-btn @click="onClose" color="warning">画像を閉じる</v-btn>
-            </v-col>
-          </v-row>
-        </v-card>
-      </v-container>
+      <div class="centered pa-4">
+        <v-container>
+          <v-card>
+            <v-row>
+              <v-col cols="12">
+                <v-img :src="url" max-height="600" contain/>
+              </v-col>
+            </v-row>
+            <v-row>
+              <v-col cols="6">
+                <v-btn @click="onSave" color="success">画像を保存</v-btn>
+              </v-col>
+              <v-col cols="6">
+                <v-btn @click="onClose" color="warning">画像を閉じる</v-btn>
+              </v-col>
+            </v-row>
+          </v-card>
+        </v-container>
+      </div>
     </div>
   </Portal>
 </template>
@@ -61,5 +63,10 @@ export default {
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+}
+
+.modal-window {
+  max-width: 600px;
+  max-height: 600px;
 }
 </style>
